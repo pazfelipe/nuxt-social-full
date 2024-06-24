@@ -5,8 +5,17 @@ export default defineNuxtConfig({
     '~/assets/css/main.scss'
   ],
   modules: [
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
   ],
+  runtimeConfig: {
+    public: {
+      publishableKey: process.env.CLERK_PUBLISHABLE_KEY,
+      signInUrl: process.env.CLERK_SIGN_IN_URL,
+      signUpUrl: process.env.CLERK_SIGN_UP_URL,
+      signInForceRedirectUrl: process.env.CLERK_SIGN_IN_FORCE_REDIRECT_URL,
+      signUpForceRedirectUrl: process.env.CLERK_SIGN_UP_FORCE_REDIRECT_URL,
+    }
+  },
   tailwindcss: {
     cssPath: ['~/assets/css/tailwind.css', {injectPosition: "first"}],
     configPath: 'tailwind.config.js',

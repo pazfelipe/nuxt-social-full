@@ -32,6 +32,7 @@
 </template>
 
 <script setup lang="ts">
+
 const isOpen = ref(false);
 const toggle = () => {
   isOpen.value = !isOpen.value;
