@@ -1,0 +1,9 @@
+<template>
+  <div>
+    <div class="flex flex-col gap-[4.5px] cursor-pointer">
+      <div class="w-6 h-1 bg-blue-500 rounded-sm"></div>
+      <div class="w-6 h-1 bg-blue-500 rounded-sm"></div>
+      <div class="w-6 h-1 bg-blue-500 rounded-sm"></div>
+    </div>
+  </div>
+</template>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h-24 flex items-center justify-between">
     <!-- LEFT -->
     <div>
       <NuxtLink to="/">LAMASOCIAL</NuxtLink>
@@ -7,6 +7,8 @@
     <!-- MIDDLE -->
     <div class="hidden"></div>
     <!-- RIGH -->
-    <div></div>
+    <div>
+      <MobileMenu />
+    </div>
   </div>
 </template>
