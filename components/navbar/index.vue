@@ -8,7 +8,7 @@
       >LAMASOCIAL</NuxtLink>
     </div>
     <!-- MIDDLE -->
-    <div class="hidden md:flex w-[50%] text-sm">
+    <div class="hidden md:flex w-[50%] text-sm items-center justify-between">
       <!-- LINKS -->
       <div class="flex gap-6 text-gray-600">
         <NuxtLink
@@ -51,6 +51,19 @@
           Stories
         </NuxtLink>
       </div>
+      <div class="hidden xl:flex p-2 bg-slate-100 items-center rounded-xl">
+        <input
+          type="search"
+          class="bg-transparent outline-none"
+          placeholder="search ..."
+        >
+        <img
+          src="/search.png"
+          alt=""
+          width="14"
+          height="14"
+        >
+      </div>
     </div>
     <!-- RIGH -->
     <div class="w-[30%] flex items-center gap-4 xl:gap-8 justify-end">
@@ -64,8 +77,8 @@
             <img
               src="/people.png"
               alt=""
-              width="20"
-              height="20"
+              width="24"
+              height="24"
             >
           </div>
           <div class="cursor-pointer">
@@ -98,25 +111,6 @@
           </div>
         </SignedOut>
       </ClerkLoaded>
-
-      <SignedIn>
-        <div class="hidden sm:block">
-          <OrganizationSwitcher after-create-organization-url="/dashboard" />
-        </div>
-        <div class="block sm:hidden">
-          <OrganizationSwitcher
-            after-create-organization-url="/dashboard"
-            :appearance="{
-            elements: {
-              organizationSwitcherTriggerIcon: `hidden`,
-              organizationPreviewTextContainer: `hidden`,
-              organizationSwitcherTrigger: `pr-0`,
-            },
-          }"
-          />
-        </div>
-        <UserButton after-sign-out-url="/" />
-      </SignedIn>
       <MobileMenu />
     </div>
   </div>
