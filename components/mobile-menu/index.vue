@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="md:hidden">
     <div
       class="flex flex-col gap-[4.5px] cursor-pointer"
       @click="toggle()"
