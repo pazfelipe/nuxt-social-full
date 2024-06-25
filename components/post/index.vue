@@ -18,8 +18,54 @@
       />
     </div>
     <!-- DESC -->
-    <div></div>
+    <div class="flex flex-col gap-4">
+      <div class="w-full min-h-96 relative">
+        <NuxtImg
+          src="https://images.pexels.com/photos/11112751/pexels-photo-11112751.jpeg?auto=compress&cs=tinysrgb&w=1200&lazy=load"
+          class="object-cover rounded-md"
+          fill
+        />
+        <p>including pay saved exercise spent language mark telephone point someone at gray blow necessary studying stick harder jump feed yard bat club seen supper</p>
+      </div>
+    </div>
     <!-- INTERACTION -->
-    <div></div>
+    <div class="flex items-center justify-between text-sm my-4">
+      <div class="flex gap-8">
+        <div class="flex items-center gap-4 bg-slate-50 p-2 rounded-xl">
+          <img
+            src="/like.png"
+            width="16"
+            height="16"
+            class="cursor-pointer"
+          />
+          <span class="text-gray-300">|</span>
+          <span class="text-gray-500">123 <span class="hidden md:inline">Likes</span> </span>
+        </div>
+        <div class="flex items-center gap-4 bg-slate-50 p-2 rounded-xl">
+          <img
+            src="/comment.png"
+            width="16"
+            height="16"
+            class="cursor-pointer"
+          />
+          <span class="text-gray-300">|</span>
+          <span class="text-gray-500">123 <span class="hidden md:inline">Comments</span> </span>
+        </div>
+
+      </div>
+      <div>
+        <div class="flex items-center gap-4 bg-slate-50 p-2 rounded-xl">
+          <img
+            src="/share.png"
+            width="16"
+            height="16"
+            class="cursor-pointer"
+          />
+          <span class="text-gray-300">|</span>
+          <span class="text-gray-500">123 <span class="hidden md:inline">Shares</span> </span>
+        </div>
+      </div>
+    </div>
+    <Comments />
   </div>
 </template>
