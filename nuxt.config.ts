@@ -4,9 +4,7 @@ export default defineNuxtConfig({
   css: [
     '~/assets/css/main.scss'
   ],
-  modules: [
-    '@nuxtjs/tailwindcss',
-  ],
+  modules: ['@nuxtjs/tailwindcss', "@nuxt/image"],
   runtimeConfig: {
     public: {
       publishableKey: process.env.CLERK_PUBLISHABLE_KEY,
@@ -24,5 +22,8 @@ export default defineNuxtConfig({
     },
     config: {},
     viewer: true,
+  },
+  image: {
+    domains: ["pexels.com"]
   }
 });
