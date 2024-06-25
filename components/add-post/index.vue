@@ -8,9 +8,20 @@
       height="48"
     />
     <!-- POST -->
-    <div>
+    <div class="flex-1">
       <!-- TEXT INPUT -->
-      <div></div>
+      <div class="flex gap-4">
+        <textarea
+          class="bg-slate-100 rounded-lg flex-1 p-2"
+          placeholder="What's on your mind?"
+        > </textarea>
+        <img
+          src="/emoji.png"
+          class="w-5 h-5 cursor-pointer self-end"
+          width="20"
+          height="20"
+        />
+      </div>
       <!-- POST OPTIONS -->
       <div></div>
     </div>
