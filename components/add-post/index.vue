@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 bg-white rounded-lg flex gap-4 justify-between text-sm">
+  <div class="p-4 bg-white shadow-md rounded-lg flex gap-4 justify-between text-sm">
     <!-- AVATAR -->
     <NuxtImg
       src="https://images.pexels.com/photos/19261803/pexels-photo-19261803/free-photo-of-cidade-meio-urbano-predios-edificios.jpeg?auto=compress&cs=tinysrgb&w=1200&lazy=load"
