@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
     });
     return post;
   } catch (err) {
-    event.res.statusCode = 500;
+    event.node.res.statusCode = 500;
     return {error: 'Failed to create post'};
   }
 });
