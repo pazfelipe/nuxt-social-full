@@ -17,7 +17,7 @@
         }}</span>
         <span class="text-sm">@{{ props.user?.username }}</span>
       </div>
-      <p>
+      <p v-if="props.user?.description">
         {{ props.user?.description }}
       </p>
       <div class="flex items-center gap-2">
@@ -31,7 +31,10 @@
           >Living in <b>{{ props.user?.city }}</b>
         </span>
       </div>
-      <div class="flex items-center gap-2">
+      <div
+        class="flex items-center gap-2"
+        v-if="props.user?.school"
+      >
         <img
           src="/school.png"
           alt=""
@@ -42,7 +45,10 @@
           >Went to <b>{{ props.user?.school }}</b>
         </span>
       </div>
-      <div class="flex items-center gap-2">
+      <div
+        class="flex items-center gap-2"
+        v-if="props.user?.work"
+      >
         <img
           src="/work.png"
           alt=""
@@ -54,7 +60,10 @@
         </span>
       </div>
       <div class="flex items-center justify-between">
-        <div class="flex gap-1 items-center">
+        <div
+          class="flex gap-1 items-center"
+          v-if="props.user?.website"
+        >
           <img
             src="/link.png"
             alt=""
@@ -76,7 +85,7 @@
             width="16"
             height="16"
           />
-          <span>Joined Nomber 2024</span>
+          <span>Joined {{ formattedDate }}</span>
         </div>
       </div>
       <button class="bg-blue-500 text-white text-sm rounded-md p-2">
@@ -96,4 +105,12 @@ const props = defineProps({
     required: false,
   },
 });
+
+const formattedDate = computed(() =>
+  new Date(props.user?.createdAt).toLocaleDateString("pt-BR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }),
+);
 </script>
