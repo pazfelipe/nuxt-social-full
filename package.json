@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@nuxt/image": "latest",
+    "@nuxtjs/ngrok": "latest",
     "@nuxtjs/tailwindcss": "^6.12.0",
     "@prisma/client": "^5.16.0",
     "h3-clerk": "^0.4.5",

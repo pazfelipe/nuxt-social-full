@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   css: [
     '~/assets/css/main.scss'
   ],
-  modules: ['@nuxtjs/tailwindcss', "@nuxt/image"],
+  modules: ['@nuxtjs/tailwindcss', "@nuxt/image", "@nuxtjs/ngrok"],
   runtimeConfig: {
     public: {
       publishableKey: process.env.CLERK_PUBLISHABLE_KEY,
@@ -25,5 +25,10 @@ export default defineNuxtConfig({
   },
   image: {
     domains: ["pexels.com"]
-  }
+  },
+  ngrok: {
+    authtoken_from_env: true, // Use NGROK_AUTHTOKEN environment variable
+    domain: 'yearly-fluent-manatee.ngrok-free.app',
+    production: false,
+  },
 });
