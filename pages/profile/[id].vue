@@ -6,6 +6,6 @@
 
 <script setup lang="ts">
 definePageMeta({
-  middleware: ["signed-in"],
+  middleware: ["signed-out"],
 });
 </script>
