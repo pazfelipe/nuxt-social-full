@@ -42,27 +42,16 @@
 
 <script lang="ts" setup>
 import { useAuth } from "vue-clerk";
-import { useFetch } from "@vueuse/core";
+import { HttpMethod } from "svix/dist/openapi";
 
 const { userId } = useAuth();
 const user = ref<any>(null);
 
 const fetchUser = async () => {
   if (userId) {
-    // @ts-ignore
-    const { data, error } = await useFetch("/api/user/find", {
-      method: "POST",
-      body: JSON.stringify({
-        userId: userId.value,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).json();
-
-    if (error.value) {
-      return console.log("Error: ", error.value);
-    }
+    const { data } = await fetchData("user/find", HttpMethod.POST, {
+      userId: userId.value,
+    });
     user.value = data.value;
   }
 };
