@@ -28,11 +28,10 @@
 
 <script lang="ts" setup>
 const props = defineProps({
-  userId: {
-    type: String,
+  user: {
+    type: Object,
     required: false,
   },
 });
 
-const userId = computed(() => props.userId);
 </script>

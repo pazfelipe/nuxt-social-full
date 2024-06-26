@@ -12,12 +12,13 @@
     <!-- BOTTOM -->
     <div class="flex flex-col gap-4 text-gray-500">
       <div class="flex items-center gap-2">
-        <span class="text-xl text-black">Lena McDonald</span>
-        <span class="text-sm">@mae</span>
+        <span class="text-xl text-black">{{
+          props.user?.name + " " + props.user?.surname
+        }}</span>
+        <span class="text-sm">@{{ props.user?.username }}</span>
       </div>
       <p>
-        species silent agree thumb whose settlers beginning right stop brought
-        at empty sun spirit together.
+        {{ props.user?.description }}
       </p>
       <div class="flex items-center gap-2">
         <img
@@ -26,7 +27,9 @@
           width="16"
           height="16"
         />
-        <span>Living in <b>Denver</b> </span>
+        <span
+          >Living in <b>{{ props.user?.city }}</b>
+        </span>
       </div>
       <div class="flex items-center gap-2">
         <img
@@ -35,7 +38,9 @@
           width="16"
           height="16"
         />
-        <span>Went to <b>Edgar High School</b> </span>
+        <span
+          >Went to <b>{{ props.user?.school }}</b>
+        </span>
       </div>
       <div class="flex items-center gap-2">
         <img
@@ -44,7 +49,9 @@
           width="16"
           height="16"
         />
-        <span>Works at <b>Apple Inc.</b> </span>
+        <span
+          >Works at <b>{{ props.user?.work }}</b>
+        </span>
       </div>
       <div class="flex items-center justify-between">
         <div class="flex gap-1 items-center">
@@ -56,10 +63,10 @@
           />
           <NuxtLink
             external
-            to="https://exemple.com"
+            :to="props.user?.website"
             target="_blank"
             class="text-blue-500 font-medium"
-            >example.com</NuxtLink
+            >{{ props.user?.website }}</NuxtLink
           >
         </div>
         <div class="flex gap-1 items-center">
@@ -84,11 +91,9 @@
 
 <script lang="ts" setup>
 const props = defineProps({
-  userId: {
-    type: String,
+  user: {
+    type: Object,
     required: false,
   },
 });
-
-const userId = computed(() => props.userId);
 </script>

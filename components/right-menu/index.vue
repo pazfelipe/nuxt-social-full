@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-col gap-6">
     <div v-if="userId" class="flex flex-col gap-6">
-      <UserInformationCard :user-id="userId" />
-      <UserMediaCard :user-id="userId" />
+      <UserInformationCard :user="props.user" />
+      <UserMediaCard :user="props.user" />
     </div>
     <FriendRequests />
     <Birthdays />
@@ -14,11 +14,11 @@
 import { Sizes } from "~/types/utils";
 
 const props = defineProps({
-  userId: {
-    type: String,
+  user: {
+    type: Object,
     required: false,
   },
 });
 
-const userId = computed(() => props.userId);
+const userId = computed(() => props?.user?.id);
 </script>
