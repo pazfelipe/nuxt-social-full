@@ -4,7 +4,10 @@
       <LeftMenu :page-type="PageTypes.PROFILE" />
     </div>
     <div class="w-full lg:w-[70%] xl:w-[50%]">
-      <div class="flex flex-col gap-6">
+      <div
+        class="flex flex-col gap-6"
+        v-if="!isNotFound"
+      >
         <div class="flex flex-col items-center justify-center">
           <div class="w-full h-64 relative">
             <img
@@ -44,6 +47,7 @@
         </div>
         <Feed />
       </div>
+      <div v-else>Not Found</div>
     </div>
     <div class="hidden lg:block w-[30%]">
       <RightMenu :user="userData" />
@@ -53,12 +57,15 @@
 
 <script setup lang="ts">
 import { HttpMethod } from "svix/dist/openapi";
+import { useAuth } from "vue-clerk";
 import { PageTypes } from "~/types/utils";
 const route = useRoute();
 const navigate = useRouter();
 
 const username = route.params.username;
+const { userId: userLogged } = useAuth();
 const userData = ref();
+const isNotFound = ref(false);
 
 const fetchUser = async () => {
   if (username) {
@@ -70,13 +77,33 @@ const fetchUser = async () => {
     } catch (err) {
       const error = err as any;
       if (error.status && error.status === 404) {
-        navigate.push("/not-found");
+        isNotFound.value = true;
+        userData.value = null;
       }
+    }
+  }
+};
+
+const fetchIsBlocked = async () => {
+  if (username) {
+    try {
+      const { data } = await fetchData("user/is-blocked", HttpMethod.POST, {
+        blockerId: userLogged.value,
+        blockedId: userData.value.id,
+      });
+      if (data.value.isBlocked) {
+        isNotFound.value = true;
+        userData.value = null;
+      }
+    } catch (err) {
+      const error = err as any;
+      console.log(error);
     }
   }
 };
 
 onMounted(async () => {
   await fetchUser();
+  await fetchIsBlocked();
 });
 </script>
