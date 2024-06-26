@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@clerk/clerk-sdk-node": "^5.0.12",
     "@nuxt/image": "latest",
     "@nuxtjs/ngrok": "latest",
     "@nuxtjs/tailwindcss": "^6.12.0",
@@ -18,6 +19,7 @@
     "nuxt": "^3.12.2",
     "prisma": "^5.16.0",
     "sass": "^1.77.6",
+    "svix": "^1.24.0",
     "tailwindcss": "^3.4.4",
     "vue": "^3.4.29",
     "vue-clerk": "^0.4.3",
