@@ -1,5 +1,5 @@
 // server/api/posts/create.ts
-import {prisma} from '~/server/lib/client';
+import {prisma} from '~/lib/client';
 import {defineEventHandler, readBody} from 'h3';
 
 export default defineEventHandler(async (event) => {
