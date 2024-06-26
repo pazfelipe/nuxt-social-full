@@ -17,7 +17,7 @@
         class="flex gap-4"
       >
         <textarea
-          class="bg-slate-100 rounded-lg flex-1 p-2 resize-none"
+          class="bg-slate-100 rounded-lg flex-1 p-2 resize-none outline-none text-gray-500"
           placeholder="What's on your mind?"
           name="desc"
           v-model="desc"
