@@ -19,7 +19,4 @@
 <script lang="ts" setup>
 import { PageTypes } from "~/types/utils";
 
-definePageMeta({
-  middleware: ["signed-in"],
-});
 </script>

@@ -47,8 +47,4 @@
 
 <script setup lang="ts">
 import { PageTypes } from "~/types/utils";
-
-definePageMeta({
-  middleware: ["signed-out"],
-});
 </script>

@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { SignUp } from "vue-clerk";
 
-definePageMeta({
-  middleware: ["signed-out"],
-});
 </script>
 
 <template>
