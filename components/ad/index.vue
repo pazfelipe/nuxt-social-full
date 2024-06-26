@@ -72,7 +72,7 @@ const adTextContent = computed(() => {
   let content;
   switch (props.size) {
     case Sizes.SMALL:
-      content = "Neighborhood came swept means vertical thing shop chart";
+      content = "Neighborhood came swept means vertical";
       break;
     case Sizes.MEDIUM:
       content =
