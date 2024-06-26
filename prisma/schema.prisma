@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User {
-  id                     String          @id @default(auto()) @map("_id") @db.ObjectId
+  id                     String          @id @map("_id")
   username               String          @unique
   avatar                 String?
   cover                  String?
@@ -41,10 +41,11 @@ model User {
 model Post {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   desc      String
+  img       String?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   user      User      @relation(fields: [userId], references: [id])
-  userId    String    @db.ObjectId
+  userId    String
   likes     Like[]
   commnets  Comment[]
 }
@@ -55,7 +56,7 @@ model Comment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   user      User     @relation(fields: [userId], references: [id])
-  userId    String   @db.ObjectId
+  userId    String
   likes     Like[]
   post      Post     @relation(fields: [postId], references: [id])
   postId    String   @db.ObjectId
@@ -65,7 +66,7 @@ model Like {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id])
-  userId    String   @db.ObjectId
+  userId    String
   post      Post?    @relation(fields: [postId], references: [id])
   postId    String?  @db.ObjectId
   Comment   Comment? @relation(fields: [commentId], references: [id])
@@ -76,18 +77,18 @@ model Follower {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt   DateTime @default(now())
   follower    User     @relation("UserFollowers", fields: [followerId], references: [id])
-  followerId  String   @db.ObjectId
+  followerId  String
   following   User     @relation("UserFollowings", fields: [followingId], references: [id])
-  followingId String   @db.ObjectId
+  followingId String
 }
 
 model FollowRequest {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt  DateTime @default(now())
   sender     User     @relation("FollowRequestsSent", fields: [senderId], references: [id])
-  senderId   String   @db.ObjectId
+  senderId   String
   receiver   User     @relation("FollowRequestsReceived", fields: [receiverId], references: [id])
-  receiverId String   @db.ObjectId
+  receiverId String
 
   @@unique([senderId, receiverId])
 }
@@ -96,9 +97,9 @@ model Block {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
   blocker   User     @relation("BlocksSent", fields: [blockerId], references: [id])
-  blockerId String   @db.ObjectId
+  blockerId String
   blocked   User     @relation("BlocksSentReceived", fields: [blockedId], references: [id])
-  blockedId String   @db.ObjectId
+  blockedId String
 
   @@unique([blockerId, blockedId])
 }
@@ -108,5 +109,5 @@ model Story {
   createdAt DateTime @default(now())
   expiresAt DateTime
   user      User     @relation(fields: [userId], references: [id])
-  userId    String   @unique @db.ObjectId
+  userId    String   @unique
 }
