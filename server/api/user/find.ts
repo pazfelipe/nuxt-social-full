@@ -5,21 +5,27 @@ import {defineEventHandler, readBody} from 'h3';
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
 
-  const {userId} = body;
+  const {username} = body;
 
   try {
     const user = await prisma.user.findFirst({
       where: {
-        id: userId,
+        username,
       },
       include: {
         _count: {
           select: {
             followers: true,
+            followings: true,
+            posts: true
           },
         },
       },
     });
+    if (!user) {
+      event.node.res.statusCode = 404;
+      return;
+    }
     return user;
   } catch (err) {
     event.node.res.statusCode = 500;
