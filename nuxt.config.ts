@@ -2,7 +2,8 @@
 export default defineNuxtConfig({
   devtools: {enabled: true},
   css: [
-    '~/assets/css/main.scss'
+    '~/assets/css/main.scss',
+    'primeicons/primeicons.css'
   ],
   modules: ['@nuxtjs/tailwindcss', "@nuxt/image", "@nuxtjs/ngrok"],
   runtimeConfig: {
