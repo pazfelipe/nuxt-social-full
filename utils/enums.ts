@@ -5,5 +5,6 @@ export enum SERVER_USER_ACTIONS {
   IS_BLOCKED = 'isBlocked',
   SWITCH_BLOCK = 'switchBlock',
   SWITCH_FOLLOW = 'switchFollow',
-  FIND_POST_WITH_MEDIA = 'postsWithMedia'
+  FIND_POST_WITH_MEDIA = 'postsWithMedia',
+  FOLLOW_REQUESTS = 'requests',
 }
