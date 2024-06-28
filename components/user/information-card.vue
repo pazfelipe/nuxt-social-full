@@ -88,23 +88,30 @@
           <span>Joined {{ formattedDate }}</span>
         </div>
       </div>
-      <button class="bg-blue-500 text-white text-sm rounded-md p-2">
-        Follow
-      </button>
-      <span class="text-red-400 self-end text-xs cursor-pointer"
-        >Block user</span
-      >
+      <UserCardInteraction
+        :user-id="props.user?.id"
+        :current-user-id="userId"
+        :is-following="following"
+        :is-following-sent="followingSent"
+        :loading="loading"
+        @on-toggle-request="toggleRequest"
+      />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { HttpMethod } from "svix/dist/openapi";
+import { useAuth } from "vue-clerk";
+
 const props = defineProps({
   user: {
     type: Object,
     required: false,
   },
 });
+
+const { userId } = useAuth();
 
 const formattedDate = computed(() =>
   new Date(props.user?.createdAt).toLocaleDateString("pt-BR", {
@@ -113,4 +120,25 @@ const formattedDate = computed(() =>
     day: "numeric",
   }),
 );
+
+const following = ref(false);
+const followingSent = ref(false);
+const loading = ref(false)
+
+const toggleRequest = async () => {
+  loading.value = true
+  try {
+    const { data } = await fetchData("/user/switch-follow", HttpMethod.POST, {
+      userId: props.user!.id,
+      currentUserId: userId.value,
+    });
+    following.value = data.value.following;
+    followingSent.value = data.value.request;
+  } catch (error) {
+    const e = error as Error;
+    console.log(e);
+  } finally {
+    loading.value = false
+  }
+};
 </script>
