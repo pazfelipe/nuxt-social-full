@@ -50,7 +50,7 @@
       <div v-else>Not Found</div>
     </div>
     <div class="hidden lg:block w-[30%]">
-      <RightMenu :user="userData" />
+      <RightMenu :user="userData" :user-medias="userMedias" />
     </div>
   </div>
 </template>
@@ -61,17 +61,17 @@ import { useAuth } from "vue-clerk";
 import { SERVER_USER_ACTIONS } from "~/utils/enums";
 import { PageTypes } from "~/types/utils";
 const route = useRoute();
-const navigate = useRouter();
 
 const username = route.params.username;
 const { userId: userLogged } = useAuth();
 const userData = ref();
 const isNotFound = ref(false);
+const userMedias = ref([]);
 
 const fetchUser = async () => {
   if (username) {
     try {
-      const { data } = await fetchData("/user", HttpMethod.POST, {
+      const { data } = await fetchData("user", HttpMethod.POST, {
         action: SERVER_USER_ACTIONS.FIND,
         params: {
           username,
@@ -91,7 +91,7 @@ const fetchUser = async () => {
 const fetchIsBlocked = async () => {
   if (username) {
     try {
-      const { data } = await fetchData("/user", HttpMethod.POST, {
+      const { data } = await fetchData("user", HttpMethod.POST, {
         action: SERVER_USER_ACTIONS.IS_BLOCKED,
         params: {
           blockerId: userLogged.value,
@@ -109,8 +109,26 @@ const fetchIsBlocked = async () => {
   }
 };
 
+const fetchUserMedias = async () => {
+  if (username) {
+    try {
+      const { data } = await fetchData("user", HttpMethod.POST, {
+        action: SERVER_USER_ACTIONS.FIND_POST_WITH_MEDIA,
+        params: {
+          userId: userLogged.value,
+        },
+      });
+      userMedias.value = data.value;
+    } catch (err) {
+      const error = err as any;
+      console.log(error);
+    }
+  }
+};
+
 onMounted(async () => {
   await fetchUser();
   await fetchIsBlocked();
+  await fetchUserMedias();
 });
 </script>

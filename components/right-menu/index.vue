@@ -9,7 +9,7 @@
         <template #fallback> Loading ... </template>
       </Suspense>
       <Suspense>
-        <UserMediaCard :user="props.user" />
+        <UserMediaCard :user="props.user" :medias="props.userMedias" />
         <template #fallback> Loading ... </template>
       </Suspense>
     </div>
@@ -27,6 +27,9 @@ const props = defineProps({
     type: Object,
     required: false,
   },
+  userMedias: {
+    type: Object
+  }
 });
 
 const userId = computed(() => props?.user?.id);

@@ -1,5 +1,8 @@
 <template>
-  <div class="p-4 bg-white rounded-lg shadow-md text-sm flex flex-col gap-4">
+  <div
+    class="p-4 bg-white rounded-lg shadow-md text-sm flex flex-col gap-4"
+    v-if="props.medias?.length"
+  >
     <!-- TOP -->
     <div class="flex justify-between items-center font-medium">
       <span class="text-gray-500">User Media</span>
@@ -13,11 +16,11 @@
     <div class="flex gap-4 justify-between flex-wrap">
       <div
         class="relative w-1/5 h-24"
-        v-for="i in 8"
+        v-for="(media, i) in props.medias"
         :key="i"
       >
         <NuxtImg
-          src="https://images.pexels.com/photos/25539612/pexels-photo-25539612/free-photo-of-cidade-meio-urbano-arte-construcao.jpeg?auto=compress&cs=tinysrgb&w=1200&lazy=load"
+          :src="media.img"
           fill
           class="object-cover rounded-md"
         />
@@ -32,6 +35,8 @@ const props = defineProps({
     type: Object,
     required: false,
   },
+  medias: {
+    type: Object,
+  },
 });
-
 </script>
