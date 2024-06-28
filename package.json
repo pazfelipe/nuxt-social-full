@@ -12,16 +12,14 @@
   "dependencies": {
     "@clerk/clerk-sdk-node": "^5.0.12",
     "@nuxt/image": "latest",
-    "@nuxtjs/ngrok": "latest",
     "@nuxtjs/tailwindcss": "^6.12.0",
-    "@prisma/client": "^5.16.0",
+    "@prisma/client": "^5.16.1",
+    "@vueuse/core": "^10.11.0",
     "h3-clerk": "^0.4.5",
     "http-status-codes": "^2.3.0",
-    "i": "^0.3.7",
-    "npm": "^10.8.1",
     "nuxt": "^3.12.2",
     "primeicons": "^7.0.0",
-    "prisma": "^5.16.0",
+    "prisma": "^5.16.1",
     "sass": "^1.77.6",
     "svix": "^1.24.0",
     "tailwindcss": "^3.4.4",
@@ -31,6 +29,7 @@
     "vue-router": "^4.3.3"
   },
   "devDependencies": {
+    "@nuxtjs/ngrok": "^3.0.1",
     "prettier": "^3.3.2"
   }
 }

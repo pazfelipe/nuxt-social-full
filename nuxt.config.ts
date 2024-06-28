@@ -15,6 +15,11 @@ export default defineNuxtConfig({
       signUpForceRedirectUrl: process.env.CLERK_SIGN_UP_FORCE_REDIRECT_URL,
     }
   },
+  typescript: {
+    tsConfig: {
+    
+    }
+  },
   tailwindcss: {
     cssPath: ['~/assets/css/tailwind.css', {injectPosition: "first"}],
     configPath: 'tailwind.config.js',
@@ -30,6 +35,6 @@ export default defineNuxtConfig({
   ngrok: {
     authtoken_from_env: true, // Use NGROK_AUTHTOKEN environment variable
     domain: 'yearly-fluent-manatee.ngrok-free.app',
-    production: false,
+    production: process.env.NODE_ENV === 'production',
   },
 });
