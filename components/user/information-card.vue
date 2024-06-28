@@ -93,8 +93,10 @@
         :current-user-id="userId"
         :is-following="following"
         :is-following-sent="followingSent"
+        :is-user-blocked="blocked"
         :loading="loading"
         @on-toggle-request="toggleRequest"
+        @on-toggle-block="onToggleBlock"
       />
     </div>
   </div>
@@ -123,10 +125,11 @@ const formattedDate = computed(() =>
 
 const following = ref(false);
 const followingSent = ref(false);
-const loading = ref(false)
+const loading = ref(false);
+const blocked = ref(false);
 
 const toggleRequest = async () => {
-  loading.value = true
+  loading.value = true;
   try {
     const { data } = await fetchData("/user/switch-follow", HttpMethod.POST, {
       userId: props.user!.id,
@@ -138,7 +141,24 @@ const toggleRequest = async () => {
     const e = error as Error;
     console.log(e);
   } finally {
-    loading.value = false
+    loading.value = false;
+  }
+};
+
+const onToggleBlock = async () => {
+  loading.value = true;
+
+  try {
+    const { data } = await fetchData("/user/switch-block", HttpMethod.POST, {
+      userId: props.user!.id,
+      currentUserId: userId.value,
+    });
+    blocked.value = data.value.blocked;
+  } catch (error) {
+    const e = error as Error;
+    console.log(e.message);
+  } finally {
+    loading.value = false;
   }
 };
 </script>
