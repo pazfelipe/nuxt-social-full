@@ -6,8 +6,10 @@
       <NuxtLink
         to="/"
         class="text-blue-500 text-sm"
+        v-if="props.user?.id !== userId"
         >See all</NuxtLink
       >
+      <UserUpdate v-else />
     </div>
     <!-- BOTTOM -->
     <div class="flex flex-col gap-4 text-gray-500">
