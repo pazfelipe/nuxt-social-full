@@ -181,11 +181,35 @@ export const switchFollow = async (params: any) => {
   }
 };
 
+export const postsWithMedia = async (params: any) => {
+  const {userId} = params as {userId: string;};
+  console.log(params)
+  try {
+    const posts = await prisma.post.findMany({
+      where: {
+        userId,
+        img: {
+          not: null
+        }
+      },
+      take: 8,
+      orderBy: {
+        createdAt: "desc"
+      }
+    });
+    return httpResponse.OK(posts);
+  } catch (error) {
+    return httpResponse.INTERNAL('Error while fetching user medias');
+  }
+
+};
+
 export const userServiceActions = {
   findUserByUsername,
   followRequest,
   follower,
   isBlocked,
   switchBlock,
-  switchFollow
+  switchFollow,
+  postsWithMedia
 };
