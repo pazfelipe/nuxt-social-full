@@ -55,6 +55,7 @@ const fetchUser = async () => {
         userId: userId.value,
       }
     });
+    console.log(data.value)
     user.value = data.value;
   }
 };

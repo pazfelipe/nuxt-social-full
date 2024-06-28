@@ -221,6 +221,63 @@ export const requests = async (params: any) => {
   }
 };
 
+export const acceptFollowRequest = async (params: any) => {
+
+  const {currentUserId, userId} = params as {currentUserId: string, userId: string;};
+
+  try {
+    const existingFollowRequest = await prisma.followRequest.findFirst({
+      where: {
+        senderId: userId,
+        receiverId: currentUserId
+      }
+    });
+
+    if (existingFollowRequest) {
+      await prisma.followRequest.delete({
+        where: {
+          id: existingFollowRequest.id
+        }
+      });
+
+      await prisma.follower.create({
+        data: {
+          followerId: userId,
+          followingId: currentUserId
+        }
+      });
+    }
+    return httpResponse.OK(true);
+  } catch (err) {
+    return httpResponse.INTERNAL('Error while fetching user');
+  }
+};
+
+export const declineFollowRequest = async (params: any) => {
+
+  const {currentUserId, userId} = params as {currentUserId: string, userId: string;};
+
+  try {
+    const existingFollowRequest = await prisma.followRequest.findFirst({
+      where: {
+        senderId: userId,
+        receiverId: currentUserId
+      }
+    });
+
+    if (existingFollowRequest) {
+      await prisma.followRequest.delete({
+        where: {
+          id: existingFollowRequest.id
+        }
+      });
+    }
+    return httpResponse.OK(true);
+  } catch (err) {
+    return httpResponse.INTERNAL('Error while fetching user');
+  }
+};
+
 
 export const userServiceActions = {
   findUserByUsername,
@@ -230,5 +287,7 @@ export const userServiceActions = {
   switchBlock,
   switchFollow,
   postsWithMedia,
-  requests
+  requests,
+  acceptFollowRequest,
+  declineFollowRequest
 };

@@ -7,4 +7,6 @@ export enum SERVER_USER_ACTIONS {
   SWITCH_FOLLOW = 'switchFollow',
   FIND_POST_WITH_MEDIA = 'postsWithMedia',
   FOLLOW_REQUESTS = 'requests',
+  ACCEPT_FOLLOW_REQUEST = 'acceptFollowRequest',
+  DECLINE_FOLLOW_REQUEST = 'declineFollowRequest'
 }

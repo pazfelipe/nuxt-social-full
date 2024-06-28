@@ -21,6 +21,7 @@
         width="20"
         height="20"
         class="cursor-pointer"
+        @click="onClick(true, request.sender.id)"
       />
       <img
         src="/reject.png"
@@ -28,6 +29,7 @@
         width="20"
         height="20"
         class="cursor-pointer"
+        @click="onClick(false, request.sender.id)"
       />
     </div>
   </div>
@@ -39,4 +41,9 @@ const props = defineProps({
     type: Object,
   },
 });
+
+const emits = defineEmits(["onRefreshList"]);
+
+const onClick = (accept: boolean, user: string) =>
+  emits("onRefreshList", { accept, user });
 </script>

@@ -9,6 +9,7 @@ export default defineEventHandler(async (event) => {
   const {action, params} = body;
 
   
+  
   const serviceFunction = userServiceActions[action as SERVER_USER_ACTIONS];
   
   if (!serviceFunction) {
