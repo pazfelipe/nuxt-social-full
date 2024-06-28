@@ -97,6 +97,7 @@
         :loading="loading"
         @on-toggle-request="toggleRequest"
         @on-toggle-block="onToggleBlock"
+        v-if="props.user?.id !== userId"
       />
     </div>
   </div>
