@@ -49,8 +49,11 @@ const user = ref<any>(null);
 
 const fetchUser = async () => {
   if (userId) {
-    const { data } = await fetchData("user/find", HttpMethod.POST, {
-      userId: userId.value,
+    const { data } = await fetchData("user", HttpMethod.POST, {
+      action: SERVER_USER_ACTIONS.FIND,
+      params: {
+        userId: userId.value,
+      }
     });
     user.value = data.value;
   }
