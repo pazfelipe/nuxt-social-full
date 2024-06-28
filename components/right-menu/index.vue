@@ -13,7 +13,7 @@
         <template #fallback> Loading ... </template>
       </Suspense>
     </div>
-    <FriendRequests />
+    <FriendRequests :user-id="props.user?.id" />
     <Birthdays />
     <Ad :size="Sizes.MEDIUM" />
   </div>

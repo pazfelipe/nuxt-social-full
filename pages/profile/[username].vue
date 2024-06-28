@@ -50,7 +50,10 @@
       <div v-else>Not Found</div>
     </div>
     <div class="hidden lg:block w-[30%]">
-      <RightMenu :user="userData" :user-medias="userMedias" />
+      <RightMenu
+        :user="userData"
+        :user-medias="userMedias"
+      />
     </div>
   </div>
 </template>

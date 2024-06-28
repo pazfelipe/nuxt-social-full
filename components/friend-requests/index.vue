@@ -1,5 +1,8 @@
 <template>
-  <div class="p-4 bg-white rounded-lg shadow-md text-sm flex flex-col gap-4">
+  <div
+    class="p-4 bg-white rounded-lg shadow-md text-sm flex flex-col gap-4"
+    v-if="userId"
+  >
     <!-- TOP -->
     <div class="flex justify-between items-center font-medium">
       <span class="text-gray-500">Friend Requests</span>
@@ -10,36 +13,33 @@
       >
     </div>
     <!-- USER -->
-    <div
-      class="flex items-center justify-between"
-      v-for="i in 3"
-      :key="i"
-    >
-      <div class="flex items-center gap-4">
-        <NuxtImg
-          src="https://images.pexels.com/photos/15045083/pexels-photo-15045083/free-photo-of-moda-tendencia-mulher-carro.jpeg?auto=compress&cs=tinysrgb&w=1200&lazy=load"
-          width="40"
-          height="40"
-          class="w-10 h-10 rounded-full object-cover"
-        />
-        <span class="font-semibold">Marian Daniels</span>
-      </div>
-      <div class="flex gap-3 justify-end">
-        <img
-          src="/accept.png"
-          alt=""
-          width="20"
-          height="20"
-          class="cursor-pointer"
-        />
-        <img
-          src="/reject.png"
-          alt=""
-          width="20"
-          height="20"
-          class="cursor-pointer"
-        />
-      </div>
-    </div>
+    <FriendRequestsRequestList :requests="requests" />
   </div>
 </template>
+
+<script lang="ts" setup>
+import { HttpMethod } from "svix/dist/openapi";
+import { useAuth } from "vue-clerk";
+
+const { userId } = useAuth();
+
+const requests = ref([]);
+
+const fetchRequests = async () => {
+  try {
+    const { data } = await fetchData("user", HttpMethod.POST, {
+      action: SERVER_USER_ACTIONS.FOLLOW_REQUESTS,
+      params: {
+        userId: userId.value,
+      },
+    });
+    requests.value = data.value;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+onMounted(async () => {
+  await fetchRequests();
+});
+</script>
