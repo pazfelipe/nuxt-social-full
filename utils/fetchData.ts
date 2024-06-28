@@ -1,7 +1,13 @@
 import type {HttpMethod} from 'svix/dist/openapi';
 import {useFetch} from "@vueuse/core";
+import type {SERVER_USER_ACTIONS} from '~/utils/enums';
 
-export const fetchData = async (path: string, method: HttpMethod, body: Record<any, any>): Promise<{data: any;}> => {
+type TBodySchema = {
+  action: SERVER_USER_ACTIONS,
+  params: Record<any, any>;
+};
+
+export const fetchData = async (path: string, method: HttpMethod, body: TBodySchema): Promise<{data: any;}> => {
 
   const {data, error, statusCode} = await useFetch(`/api/${path}`, {
     method,
