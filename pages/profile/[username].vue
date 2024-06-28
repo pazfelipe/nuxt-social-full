@@ -58,6 +58,7 @@
 <script setup lang="ts">
 import { HttpMethod } from "svix/dist/openapi";
 import { useAuth } from "vue-clerk";
+import { SERVER_USER_ACTIONS } from "~/utils/enums";
 import { PageTypes } from "~/types/utils";
 const route = useRoute();
 const navigate = useRouter();
@@ -70,8 +71,11 @@ const isNotFound = ref(false);
 const fetchUser = async () => {
   if (username) {
     try {
-      const { data } = await fetchData("user/find", HttpMethod.POST, {
-        username,
+      const { data } = await fetchData("/user", HttpMethod.POST, {
+        action: SERVER_USER_ACTIONS.FIND,
+        params: {
+          username,
+        },
       });
       userData.value = data.value;
     } catch (err) {
@@ -87,9 +91,12 @@ const fetchUser = async () => {
 const fetchIsBlocked = async () => {
   if (username) {
     try {
-      const { data } = await fetchData("user/is-blocked", HttpMethod.POST, {
-        blockerId: userLogged.value,
-        blockedId: userData.value.id,
+      const { data } = await fetchData("/user", HttpMethod.POST, {
+        action: SERVER_USER_ACTIONS.IS_BLOCKED,
+        params: {
+          blockerId: userLogged.value,
+          blockedId: userData.value.id,
+        },
       });
       if (data.value.isBlocked) {
         isNotFound.value = true;

@@ -105,6 +105,7 @@
 <script lang="ts" setup>
 import { HttpMethod } from "svix/dist/openapi";
 import { useAuth } from "vue-clerk";
+import { SERVER_USER_ACTIONS } from "~/utils/enums";
 
 const props = defineProps({
   user: {
@@ -131,9 +132,12 @@ const blocked = ref(false);
 const toggleRequest = async () => {
   loading.value = true;
   try {
-    const { data } = await fetchData("/user/switch-follow", HttpMethod.POST, {
-      userId: props.user!.id,
-      currentUserId: userId.value,
+    const { data } = await fetchData("/user", HttpMethod.POST, {
+      action: SERVER_USER_ACTIONS.SWITCH_FOLLOW,
+      params: {
+        userId: props.user!.id,
+        currentUserId: userId.value,
+      },
     });
     following.value = data.value.following;
     followingSent.value = data.value.request;
@@ -149,9 +153,12 @@ const onToggleBlock = async () => {
   loading.value = true;
 
   try {
-    const { data } = await fetchData("/user/switch-block", HttpMethod.POST, {
-      userId: props.user!.id,
-      currentUserId: userId.value,
+    const { data } = await fetchData("user", HttpMethod.POST, {
+      action: SERVER_USER_ACTIONS.SWITCH_BLOCK,
+      params: {
+        userId: props.user!.id,
+        currentUserId: userId.value,
+      },
     });
     blocked.value = data.value.blocked;
   } catch (error) {
