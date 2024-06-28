@@ -2,9 +2,10 @@
   <div class="flex flex-col gap-2">
     <Suspense>
       <button
-        class="w-full bg-blue-500 text-white text-sm rounded-md p-2"
+        class="w-full text-white text-sm rounded-md p-2"
+        :class="buttonBgColor"
         @click="onToggleRequest"
-        :disabled="props.loading"
+        :disabled="props.loading || props.isUserBlocked"
       >
         <i
           class="pi pi-spin pi-spinner"
@@ -14,7 +15,7 @@
       </button>
       <template #fallback> ... </template>
     </Suspense>
-    <span class="text-red-400 self-end text-xs cursor-pointer">
+    <span class="text-red-400 self-end text-xs cursor-pointer" @click="onToggleBlock">
       {{ blockText }}
     </span>
   </div>
@@ -61,7 +62,13 @@ const followingText = computed(() =>
       : "Follow User",
 );
 
+const buttonBgColor = computed(() => props.isUserBlocked ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500')
+
 const onToggleRequest = () => {
   emits("onToggleRequest");
 };
+
+const onToggleBlock = () => {
+  emits("onToggleBlock");
+}
 </script>
