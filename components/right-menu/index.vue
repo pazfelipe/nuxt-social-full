@@ -1,8 +1,17 @@
 <template>
   <div class="flex flex-col gap-6">
-    <div v-if="userId" class="flex flex-col gap-6">
-      <UserInformationCard :user="props.user" />
-      <UserMediaCard :user="props.user" />
+    <div
+      v-if="userId"
+      class="flex flex-col gap-6"
+    >
+      <Suspense>
+        <UserInformationCard :user="props.user" />
+        <template #fallback> Loading ... </template>
+      </Suspense>
+      <Suspense>
+        <UserMediaCard :user="props.user" />
+        <template #fallback> Loading ... </template>
+      </Suspense>
     </div>
     <FriendRequests />
     <Birthdays />
